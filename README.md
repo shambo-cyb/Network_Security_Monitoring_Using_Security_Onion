@@ -39,18 +39,35 @@ Looking at the TCP stream in Wireshark is where we see the attack unfold in real
 - It serves as a perfect visual example of what an SQL injection attack looks like on the network level.
 
 
+## Step 4 
+### TCP Stream Flow 
 
+<img width="600" height="575" alt="6" src="https://github.com/user-attachments/assets/a22e2ead-38e9-4265-9241-76c89dd0c9ce" />
 
+In these two panels, I’m comparing the request and the response from a captured attack. On the left, the attacker sends a malicious SQL injection payload through the username parameter, attempting to extract credit card and login details. On the right, the server responds by exposing sensitive data—usernames, passwords, and signatures—confirming the injection was successful. This side-by-side view shows the full attack chain: exploitation on one side and data leakage on the other.
+- Left side: malicious HTTP request with SQL injection
+- Right side: exposed database records in plain text
+- Together: clear evidence of a successful attack
 
+## Step 5
+### Data Exfiltration using DNS 
 
+<img width="600" height="703" alt="8" src="https://github.com/user-attachments/assets/b390515c-d24d-4221-821f-9c6f122d97cc" />
 
+In this, I have performed a DNS exfiltration attack to see how data can be secretly moved out of a system. First, I logged into the vulnerable target and found encoded information inside the DNS query logs. Then, I transferred the extracted file to my Kali machine, decoded it from hex, and uncovered a confidential document. This exercise gave me a clear picture of how attackers hide data inside DNS traffic and why monitoring DNS is so critical.
+- I have pulled data hidden in DNS query logs
+- I have exfiltrated and decoded the file into readable text
+- I have revealed a confidential document about a past breach
 
+## Step 6 
+### Decoding Hidden Confidential Data
 
+<img width="600" height="789" alt="9" src="https://github.com/user-attachments/assets/bfa44f5d-5198-43e9-8d61-21ae0ec1e64a" />
 
-
-
-
-
+Here, I have manually decoded exfiltrated data using a simple hex-to-text conversion. By echoing the hex string and piping it through xxd -r -p, I revealed the hidden message: CONFIDENTIAL DOCUMENT – DO NOT SHARE. This step shows how attackers can smuggle sensitive files out in encoded form and later reconstruct them on their own systems. It demonstrates how even harmless-looking hex data can actually contain critical secrets once decoded.
+- I have taken raw hex data from DNS exfiltration.
+- I have decoded it locally with xxd.
+- I have revealed the confidential contents successfully.
 
 
 
