@@ -135,9 +135,11 @@ I picked Pick 3 interesting alerts and screenshot their details.
 
 <img width="600" height="623" alt="image" src="https://github.com/user-attachments/assets/81c407cf-503c-44b1-ad5f-b67e36c07cf9" />
 
-
+<br><br>
 
 <img width="600" height="555" alt="image" src="https://github.com/user-attachments/assets/6fd2d2d1-38fc-49e2-b108-a1d9735661e0" />
+
+<br><br>
 
 <img width="600" height="263" alt="image" src="https://github.com/user-attachments/assets/2a0fea09-a150-436a-8d34-680972b0f54b" />
 
