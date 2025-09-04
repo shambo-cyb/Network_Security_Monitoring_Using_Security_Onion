@@ -188,6 +188,21 @@ I picked Pick 3 interesting alerts and screenshot their details.
 <img width="600" height="427" alt="image" src="https://github.com/user-attachments/assets/78f26a06-e583-4910-aade-a3562812f434" />
 
 
+- The **correlated events view** in Sguil reveals **multiple alerts** triggered by both the **port scan** and the **Unreal IRC backdoor exploit** targeting the Metasploitable VM. 🎯
+
+- Alerts include:
+  - ⚠️ Suspicious **TCP port scans**  
+  - 🔌 Unexpected connections on **IRC ports**  
+  - 🐚 Unusual **shell access activity**  
+
+- Each alert provides **detailed packet captures** alongside the **Snort rules** that detected the malicious behavior, enabling deep forensic analysis. 🕵️‍♂️
+
+- By analyzing these correlated events together, we clearly see the attacker’s steps:
+  1. Mapping open ports 🔍  
+  2. Exploiting the backdoor vulnerability 🚪  
+
+- The **timeline and context** from correlated events paint a full picture, linking the reconnaissance phase directly to the successful exploit — delivering a complete and actionable attack narrative. 📅
+
 ## Step 5
 ### Dig into Logs with ELSA
 
