@@ -8,37 +8,38 @@ In this project, we demonstrate two common cyber attack techniques and how Secur
 
 ---
 
-### 🔍 Scenario 1: SQL Injection Attack
+### 🔍 Scenario 1: Combined DNS Data Exfiltration & SQL Injection Attack
 
 - **What happens:**  
-  An attacker exploits a vulnerable web application by injecting malicious SQL code.
+  An attacker exploits a vulnerable web application by injecting malicious SQL code **while** covertly exfiltrating sensitive data using DNS queries.
 
 - **Goal:**  
-  To gain unauthorized access or manipulate the backend database.
+  To gain unauthorized access to the database **and** stealthily extract confidential information without raising suspicion.
 
 - **Detection:**  
-  Security Onion monitors network traffic and identifies unusual database queries, generating alerts that highlight the attack attempt.
+  Security Onion monitors both network traffic and database queries, generating alerts for abnormal DNS activity alongside suspicious SQL commands.
 
 - **Why it matters:**  
-  SQL injection is one of the most common and dangerous web attacks, leading to data breaches if undetected.
+  Combining SQL Injection with DNS data exfiltration makes the attack harder to
 
 ---
 
-### 🔍 Scenario 2: DNS Data Exfiltration
+### 🔍 Scenario 2: Kali Linux Exploitation and Security Onion Monitoring
 
 - **What happens:**  
-  Sensitive data is covertly sent out of the network by embedding it in DNS queries.
+  Using Kali Linux, an attacker scans and exploits a vulnerable Metasploitable VM with tools like Nmap and Metasploit. Security Onion’s monitoring tools, such as **Sguil** and **ELSA**, capture and alert on these activities in real-time.
 
 - **Goal:**  
-  To stealthily extract confidential information without triggering normal detection methods.
+  To discover open ports and running services, exploit known vulnerabilities, and gain unauthorized access while Security Onion monitors network traffic and logs.
 
 - **Detection:**  
-  Security Onion analyzes DNS traffic patterns and flags abnormal or excessive DNS queries, signaling potential data theft.
+  Security Onion generates alerts from Sguil based on the port scans and exploitation attempts, providing detailed correlated events and packet data. ELSA enables deep log analysis to investigate network connections, DNS queries, HTTP traffic, and flagged notices.
 
 - **Why it matters:**  
-  DNS exfiltration bypasses many traditional security tools, so detecting it is crucial for data protection.
+  This scenario showcases practical attack techniques and highlights how comprehensive monitoring tools detect and analyze intrusions, improving incident response.
 
 ---
+
 # Scenario 1
 
 In this cybersecurity lab, a simulated network environment is used to demonstrate two common cyber attacks: SQL injection and DNS data exfiltration. The network includes several virtual machines, such as a Kali Linux attacker machine and a vulnerable Metasploitable server. The first part of the lab involves the attacker using a web browser on the Kali machine to perform an SQL injection attack against the Metasploitable server's web application, successfully extracting sensitive credit card information from its MySQL database. Network logs from a Security Onion VM are then analyzed to identify and investigate the attack traffic.
