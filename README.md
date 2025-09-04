@@ -1,6 +1,45 @@
 # Network_Security_Monitoring_Using_Security_Onion
 In this cybersecurity lab, a simulated network environment is used to demonstrate two common cyber attacks: SQL injection and DNS data exfiltration. The network includes several virtual machines, such as a Kali Linux attacker machine and a vulnerable Metasploitable server. The first part of the lab involves the attacker using a web browser on the Kali machine to perform an SQL injection attack against the Metasploitable server's web application, successfully extracting sensitive credit card information from its MySQL database. Network logs from a Security Onion VM are then analyzed to identify and investigate the attack traffic.
 
+---
+## Attack Scenarios Overview
+
+In this project, we demonstrate two common cyber attack techniques and how Security Onion detects them in a monitored network environment.
+
+---
+
+### 🔍 Scenario 1: SQL Injection Attack
+
+- **What happens:**  
+  An attacker exploits a vulnerable web application by injecting malicious SQL code.
+
+- **Goal:**  
+  To gain unauthorized access or manipulate the backend database.
+
+- **Detection:**  
+  Security Onion monitors network traffic and identifies unusual database queries, generating alerts that highlight the attack attempt.
+
+- **Why it matters:**  
+  SQL injection is one of the most common and dangerous web attacks, leading to data breaches if undetected.
+
+---
+
+### 🔍 Scenario 2: DNS Data Exfiltration
+
+- **What happens:**  
+  Sensitive data is covertly sent out of the network by embedding it in DNS queries.
+
+- **Goal:**  
+  To stealthily extract confidential information without triggering normal detection methods.
+
+- **Detection:**  
+  Security Onion analyzes DNS traffic patterns and flags abnormal or excessive DNS queries, signaling potential data theft.
+
+- **Why it matters:**  
+  DNS exfiltration bypasses many traditional security tools, so detecting it is crucial for data protection.
+
+---
+# Scenario 1
 
 In this cybersecurity lab, a simulated network environment is used to demonstrate two common cyber attacks: SQL injection and DNS data exfiltration. The network includes several virtual machines, such as a Kali Linux attacker machine and a vulnerable Metasploitable server. The first part of the lab involves the attacker using a web browser on the Kali machine to perform an SQL injection attack against the Metasploitable server's web application, successfully extracting sensitive credit card information from its MySQL database. Network logs from a Security Onion VM are then analyzed to identify and investigate the attack traffic.
 
@@ -8,7 +47,7 @@ The second part of the lab focuses on data exfiltration. The attacker, having ga
 
 confidential.txt) into a hexadecimal format. This hexadecimal data is then embedded within DNS queries and sent to the Metasploitable server, which is configured as a DNS server. The attacker uses a shell script to automate this process, effectively using the DNS service as a covert channel to leak the file's contents. The exfiltrated data is then retrieved, reassembled, and verified on the Kali machine.
 
-# Scenario 1
+
 ## Environment of the setup 
 <img width="600" height="310" alt="image" src="https://github.com/user-attachments/assets/ef74a7f1-7e99-47af-a9f3-c42866aacb21" />
 
